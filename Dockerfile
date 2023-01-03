@@ -1,16 +1,13 @@
-FROM debian:buster-20200514-slim
+FROM ubuntu:22.04
 
 LABEL \
-	maintainer="Michel Stempin <michel.stempin@funkey-project.com>" \
+	maintainer="ZeroK" \
 	vendor="Lakka Project" \
-	description="Container with everything needed to build FunKey-OS"
-
-# Setup environment
-ENV DEBIAN_FRONTEND noninteractive
+	description="Container with everything needed to build Lakka"
 
 RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak
 COPY . .
-ADD sources.list /etc/apt/ 
+ADD sources.list /etc/apt/
 
 RUN \
 	# Install dependencies
@@ -30,7 +27,7 @@ RUN \
 	#gzip \
 	bzip2 \
 	perl \
-	#tar \
+	tar \
 	cpio \
 	unzip \
 	rsync \
@@ -100,7 +97,7 @@ RUN \
 	chown -R lakka:lakka /home/lakka
 
 # Set user
-USER funkey
+USER lakka
 
 # Set working directory
 WORKDIR /home/lakka/
